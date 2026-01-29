@@ -26,7 +26,7 @@ uv run python src/video_processor.py video.mp4 subs.srt config.json -r pil
 ## 架構
 
 ```
-影片 + 字幕 → ContentAnalyzer 分析 → 使用者審批 → 渲染引擎 → MoviePy 合成 → 輸出影片
+影片 + 字幕 → ContentAnalyzer 分析 → 使用者核准 → 渲染引擎 → MoviePy 合成 → 輸出影片
 ```
 
 **雙渲染引擎**：

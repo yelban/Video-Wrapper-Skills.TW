@@ -1,6 +1,6 @@
 ---
 name: video-wrapper
-description: 為訪談影片新增綜藝特效（綜藝字卡、卡片、人物條、章節標題等）。支援 4 種視覺主題，先分析字幕內容生成建議供使用者審批，再渲染影片。
+description: 為訪談影片新增綜藝特效（綜藝字卡、卡片、人物條、章節標題等）。支援 4 種視覺主題，先分析字幕內容生成建議供使用者核准，再渲染影片。
 argument-hint: <video-file> <subtitle-file> [config.json] [output.mp4]
 user-invocable: true
 allowed-tools: Bash, Read, Write
@@ -60,7 +60,7 @@ agent: general-purpose
 
 ### 第三步：生成設定並渲染
 
-根據使用者審批後的建議生成 config.json，然後渲染影片。
+根據使用者核准後的建議生成 config.json，然後渲染影片。
 
 ## 可用元件
 
