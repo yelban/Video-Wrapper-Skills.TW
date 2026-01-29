@@ -19,7 +19,7 @@
 /* ===== Fancy Text - Notion ===== */
 
 .fancy-text.theme-notion {
-    font-family: "Georgia", "Noto Serif SC", "Source Han Serif CN", serif;
+    font-family: "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", "Georgia", "Noto Serif SC", "Source Han Serif CN", serif;
     font-weight: 700;
     letter-spacing: 0;
 }
@@ -83,7 +83,7 @@
 
 .term-card.theme-notion .title {
     color: var(--text-dark);
-    font-family: "Georgia", "Noto Serif SC", serif;
+    font-family: "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", "Georgia", "Noto Serif SC", serif;
     font-weight: 700;
     font-size: 26px;
     text-shadow: none;
@@ -102,7 +102,7 @@
 
 .term-card.theme-notion .description {
     color: var(--text-dark);
-    font-family: -apple-system, "PingFang SC", sans-serif;
+    font-family: "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", -apple-system, "PingFang SC", sans-serif;
     font-size: 15px;
     line-height: 1.7;
     margin-top: 12px;

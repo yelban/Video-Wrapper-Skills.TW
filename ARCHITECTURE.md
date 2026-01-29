@@ -1,86 +1,86 @@
-# 架构文档
+# 架構檔案
 
-## 系统概览
+## 系統概覽
 
-访谈视频处理器基于分离的渲染后端架构，支持两种视觉效果生成方式：
-- **Browser Backend**: HTML/CSS/Anime.js + Playwright 浏览器自动化（推荐）
-- **PIL Backend**: Python PIL 纯 Python 实现（备选方案）
+訪談影片處理器基於分離的渲染後端架構，支援兩種視覺效果生成方式：
+- **Browser Backend**: HTML/CSS/Anime.js + Playwright 瀏覽器自動化（推薦）
+- **PIL Backend**: Python PIL 純 Python 實現（備選方案）
 
-典型的数据流如下：
+典型的資料流如下：
 ```
-视频文件 + 字幕文件
+影片檔案 + 字幕檔案
     ↓
-内容分析器（提取建议）
+內容分析器（提取建議）
     ↓
-用户审批配置
+使用者審批設定
     ↓
-渲染引擎（生成帧序列）
-    ├→ Browser: HTML → Playwright → 截图
-    └→ PIL: Python → PIL 绘制
+渲染引擎（生成幀序列）
+    ├→ Browser: HTML → Playwright → 截圖
+    └→ PIL: Python → PIL 繪製
     ↓
-视频合成器（MoviePy）
+影片合成器（MoviePy）
     ↓
-输出视频
+輸出影片
 ```
 
-## 核心模块
+## 核心模組
 
 ### 1. video_processor.py
-主入口和协调器，负责：
-- 命令行参数解析
-- 配置文件加载验证
-- 渲染器选择（自动或手动指定）
-- 多种组件类型的分发处理
-- 视频合成和导出
+主入口和協調器，負責：
+- 命令列引數解析
+- 設定檔案載入驗證
+- 渲染器選擇（自動或手動指定）
+- 多種元件型別的分發處理
+- 影片合成和匯出
 
-关键函数：
-- `process_video()`: 主处理流程
-- `_generate_clips_browser()`: 使用浏览器渲染器生成图层
-- `_generate_clips_pil()`: 使用 PIL 渲染器生成图层
+關鍵函式：
+- `process_video()`: 主處理流程
+- `_generate_clips_browser()`: 使用瀏覽器渲染器生成圖層
+- `_generate_clips_pil()`: 使用 PIL 渲染器生成圖層
 
 ### 2. browser_renderer.py
-Playwright 浏览器自动化渲染器，负责：
-- Playwright 浏览器实例管理
-- HTML 模板加载与渲染
-- 动画状态管理（通过 seek 控制当前帧）
-- 截图捕获和图像输出
+Playwright 瀏覽器自動化渲染器，負責：
+- Playwright 瀏覽器例項管理
+- HTML 模板載入與渲染
+- 動畫狀態管理（透過 seek 控制當前幀）
+- 截圖捕獲和影像輸出
 
-关键类和方法：
-- `BrowserRenderer`: 主类，生命周期管理
+關鍵類和方法：
+- `BrowserRenderer`: 主類，生命週期管理
 - `render_fancy_text_frames()`: 花字渲染
-- `render_term_card_frames()`: 名词卡片渲染
-- `render_lower_third_frames()`: 人物条渲染
-- 以及其他 8 个组件的渲染方法
+- `render_term_card_frames()`: 名詞卡片渲染
+- `render_lower_third_frames()`: 人物條渲染
+- 以及其他 8 個元件的渲染方法
 
 工作原理：
 ```
-加载 HTML 模板
+載入 HTML 模板
     ↓
-注入配置参数（JSON）
+注入設定引數（JSON）
     ↓
-调用 JavaScript initAnimation()
+呼叫 JavaScript initAnimation()
     ↓
-循环：
-  - 计算当前帧时间
-  - 调用 JavaScript seek(t)
-  - Playwright 截图
-  - 保存为 PNG
+迴圈：
+  - 計算當前幀時間
+  - 呼叫 JavaScript seek(t)
+  - Playwright 截圖
+  - 儲存為 PNG
 ```
 
 ### 3. content_analyzer.py
-内容分析引擎，负责：
-- 从字幕文件提取信息
-- 分析内容，识别：
-  - 嘉宾信息（人物条）
-  - 话题切换点（章节标题）
-  - 关键观点（花字短语）
-  - 专业术语（名词卡片）
-  - 精彩言论（金句卡片）
-  - 数字数据（数据动画）
-  - 核心要点（要点列表）
-  - 社交媒体信息（社交条）
+內容分析引擎，負責：
+- 從字幕檔案提取資訊
+- 分析內容，識別：
+  - 嘉賓資訊（人物條）
+  - 話題切換點（章節標題）
+  - 關鍵觀點（花字短語）
+  - 專業術語（名詞卡片）
+  - 精彩言論（金句卡片）
+  - 數字資料（資料動畫）
+  - 核心要點（要點列表）
+  - 社交媒體資訊（社交條）
 
-包含多个 Dataclass 定义建议类型：
+包含多個 Dataclass 定義建議型別：
 - `LowerThirdSuggestion`
 - `ChapterTitleSuggestion`
 - `FancyTextSuggestion`
@@ -90,64 +90,64 @@ Playwright 浏览器自动化渲染器，负责：
 - `BulletPointsSuggestion`
 - `SocialBarSuggestion`
 
-### 4. fancy_text.py（PIL 备选方案）
-纯 Python PIL 实现的花字生成器：
-- PIL 文字渲染与描边
-- 阴影效果实现
-- 旋转和缩放变换
-- Spring 动画应用
+### 4. fancy_text.py（PIL 備選方案）
+純 Python PIL 實現的花字生成器：
+- PIL 文字渲染與描邊
+- 陰影效果實現
+- 旋轉和縮放變換
+- Spring 動畫應用
 
-### 5. term_card.py（PIL 备选方案）
-纯 Python PIL 实现的名词卡片生成器：
-- 圆角矩形绘制
-- 渐变边框（Pillow 模拟）
-- 文字布局和自动换行
-- 动画效果（滑入、淡出）
+### 5. term_card.py（PIL 備選方案）
+純 Python PIL 實現的名詞卡片生成器：
+- 圓角矩形繪製
+- 漸變邊框（Pillow 模擬）
+- 文字佈局和自動換行
+- 動畫效果（滑入、淡出）
 
 ### 6. animations.py
-动画工具函数库（用于 PIL 后端）：
-- `spring()`: Spring 物理引擎实现
-  - 参数：frame, fps, from_value, to_value, damping, stiffness
-  - 模拟 Remotion 风格弹性动画
-- `interpolate()`: 线性插值函数
-  - 支持任意输入/输出范围映射
-  - 支持超出范围处理（clamp/extend/wrap）
+動畫工具函式庫（用於 PIL 後端）：
+- `spring()`: Spring 物理引擎實現
+  - 引數：frame, fps, from_value, to_value, damping, stiffness
+  - 模擬 Remotion 風格彈性動畫
+- `interpolate()`: 線性插值函式
+  - 支援任意輸入/輸出範圍對映
+  - 支援超出範圍處理（clamp/extend/wrap）
 
-## 模板系统
+## 模板系統
 
-9 个 HTML 模板位于 `templates/` 目录，每个对应一种组件：
+9 個 HTML 模板位於 `templates/` 目錄，每個對應一種元件：
 
-| 模板 | 组件类型 | 用途 |
+| 模板 | 元件型別 | 用途 |
 |------|---------|------|
-| fancy-text.html | 花字 | 概括观点短语 |
-| term-card.html | 名词卡片 | 解释专业术语 |
-| lower-third.html | 人物条 | 显示嘉宾信息 |
-| chapter-title.html | 章节标题 | 话题切换标题 |
-| quote-callout.html | 金句卡片 | 突出精彩言论 |
-| animated-stats.html | 数据动画 | 展示数字数据 |
-| bullet-points.html | 要点列表 | 总结核心要点 |
-| social-bar.html | 社交条 | 社交媒体引导 |
-| video-config.json.template | 配置模板 | JSON 配置示例 |
+| fancy-text.html | 花字 | 概括觀點短語 |
+| term-card.html | 名詞卡片 | 解釋專業術語 |
+| lower-third.html | 人物條 | 顯示嘉賓資訊 |
+| chapter-title.html | 章節標題 | 話題切換標題 |
+| quote-callout.html | 金句卡片 | 突出精彩言論 |
+| animated-stats.html | 資料動畫 | 展示數字資料 |
+| bullet-points.html | 要點列表 | 總結核心要點 |
+| social-bar.html | 社交條 | 社交媒體引導 |
+| video-config.json.template | 設定模板 | JSON 設定示例 |
 
-### 模板特点：
-- 独立的 HTML 结构，可单独测试
-- JavaScript `initAnimation(config)` 函数接收配置
-- `seek(timeMs)` 方法用于帧控制（Playwright 调用）
-- CSS 变量支持主题切换
-- Anime.js 动画库支持
+### 模板特點：
+- 獨立的 HTML 結構，可單獨測試
+- JavaScript `initAnimation(config)` 函式接收設定
+- `seek(timeMs)` 方法用於幀控制（Playwright 呼叫）
+- CSS 變數支援主題切換
+- Anime.js 動畫庫支援
 
-## 主题系统
+## 主題系統
 
-CSS 主题在 `static/css/` 目录：
+CSS 主題在 `static/css/` 目錄：
 
-| 主题 | 文件 | 特点 | 场景 |
+| 主題 | 檔案 | 特點 | 場景 |
 |------|------|------|------|
-| notion | theme-notion.css | 温暖知识风，柔和渐变 | 教育、知识分享 |
-| cyberpunk | theme-cyberpunk.css | 霓虹未来感，鲜艳对比 | 科技、前沿话题 |
-| apple | theme-apple.css | 极简优雅，中性色系 | 商务、专业访谈 |
-| aurora | theme-aurora.css | 渐变流光，炫彩效果 | 创意、艺术内容 |
+| notion | theme-notion.css | 溫暖知識風，柔和漸變 | 教育、知識分享 |
+| cyberpunk | theme-cyberpunk.css | 霓虹未來感，鮮豔對比 | 科技、前沿話題 |
+| apple | theme-apple.css | 極簡優雅，中性色系 | 商務、專業訪談 |
+| aurora | theme-aurora.css | 漸變流光，炫彩效果 | 創意、藝術內容 |
 
-每个主题通过 CSS 变量定义：
+每個主題透過 CSS 變數定義：
 ```css
 :root[data-theme="notion"] {
   --primary-color: #f5b041;
@@ -157,94 +157,94 @@ CSS 主题在 `static/css/` 目录：
 }
 ```
 
-模板通过 `data-theme` 属性激活主题。
+模板透過 `data-theme` 屬性啟用主題。
 
-## 动画引擎
+## 動畫引擎
 
-### Anime.js 集成
-- 用于浏览器后端的帧动画
-- 支持 Spring 物理、缓动曲线等高级效果
-- 通过 `seek()` 方法实现帧级控制
+### Anime.js 整合
+- 用於瀏覽器後端的幀動畫
+- 支援 Spring 物理、緩動曲線等高階效果
+- 透過 `seek()` 方法實現幀級控制
 
-### Spring 动画原理
+### Spring 動畫原理
 ```python
 x(t) = to_value - (to_value - from_value) * exp(-damping*t) * cos(stiffness*t)
 ```
-通过调整 `damping` 和 `stiffness` 参数实现不同的弹性效果。
+透過調整 `damping` 和 `stiffness` 引數實現不同的彈性效果。
 
-## 配置文件格式
+## 設定檔案格式
 
-JSON 配置包含以下顶级字段：
+JSON 設定包含以下頂級欄位：
 
 ```json
 {
-  "theme": "notion",           # 选择主题
-  "lowerThirds": [...],        # 人物条数组
-  "chapterTitles": [...],      # 章节标题数组
-  "keyPhrases": [...],         # 花字数组
-  "termDefinitions": [...],    # 名词卡片数组
-  "quotes": [...],             # 金句卡片数组
-  "stats": [...],              # 数据动画数组
-  "bulletPoints": [...],       # 要点列表数组
-  "socialBars": [...]          # 社交条数组
+  "theme": "notion",           # 選擇主題
+  "lowerThirds": [...],        # 人物條陣列
+  "chapterTitles": [...],      # 章節標題陣列
+  "keyPhrases": [...],         # 花字陣列
+  "termDefinitions": [...],    # 名詞卡片陣列
+  "quotes": [...],             # 金句卡片陣列
+  "stats": [...],              # 資料動畫陣列
+  "bulletPoints": [...],       # 要點列表陣列
+  "socialBars": [...]          # 社交條陣列
 }
 ```
 
-## 数据流详解
+## 資料流詳解
 
-### 1. 配置阶段
+### 1. 設定階段
 ```
-用户提供视频 + 字幕
+使用者提供影片 + 字幕
     ↓
-ContentAnalyzer.analyze_subtitle() 读取 .srt
+ContentAnalyzer.analyze_subtitle() 讀取 .srt
     ↓
-返回 8 种类型的建议对象列表
+返回 8 種類型的建議物件列表
     ↓
-用户编辑或确认建议
+使用者編輯或確認建議
     ↓
 生成或修改 config.json
 ```
 
-### 2. 渲染阶段（Browser 后端）
+### 2. 渲染階段（Browser 後端）
 ```
-video_processor 加载配置
+video_processor 載入設定
     ↓
-对每个组件：
-  - 确定时间范围
-  - 创建 BrowserRenderer 实例
-  - 加载对应 HTML 模板
-  - 通过 JavaScript 注入配置
-  - 循环渲染帧：
-    * 计算当前时间
-    * 调用 seek(timeMs)
-    * Playwright 截图
-    * 保存 PNG 序列
-  - 使用 MoviePy ImageClip 构建视频层
+對每個元件：
+  - 確定時間範圍
+  - 建立 BrowserRenderer 例項
+  - 載入對應 HTML 模板
+  - 透過 JavaScript 注入設定
+  - 迴圈渲染幀：
+    * 計算當前時間
+    * 呼叫 seek(timeMs)
+    * Playwright 截圖
+    * 儲存 PNG 序列
+  - 使用 MoviePy ImageClip 構建影片層
     ↓
-合并所有层（原视频 + 效果层）
+合併所有層（原影片 + 效果層）
     ↓
-导出最终视频
-```
-
-### 3. 渲染阶段（PIL 后端）
-```
-video_processor 加载配置
-    ↓
-对每个组件：
-  - 确定时间范围和帧数
-  - 循环渲染帧：
-    * 调用 fancy_text.py / term_card.py
-    * 应用 animations.py 动画函数
-    * 使用 PIL 绘制到内存
-    * 保存 PNG 序列
-  - 使用 MoviePy ImageClip 构建视频层
-    ↓
-合并所有层（原视频 + 效果层）
-    ↓
-导出最终视频
+匯出最終影片
 ```
 
-## 文件依赖关系
+### 3. 渲染階段（PIL 後端）
+```
+video_processor 載入設定
+    ↓
+對每個元件：
+  - 確定時間範圍和幀數
+  - 迴圈渲染幀：
+    * 呼叫 fancy_text.py / term_card.py
+    * 應用 animations.py 動畫函式
+    * 使用 PIL 繪製到記憶體
+    * 儲存 PNG 序列
+  - 使用 MoviePy ImageClip 構建影片層
+    ↓
+合併所有層（原影片 + 效果層）
+    ↓
+匯出最終影片
+```
+
+## 檔案依賴關係
 
 ```
 video_processor.py （主）
@@ -253,60 +253,60 @@ video_processor.py （主）
 │   └── static/css/*.css
 │       ├── effects.css
 │       └── theme-*.css
-├── fancy_text.py （PIL 备选）
+├── fancy_text.py （PIL 備選）
 │   └── animations.py
-├── term_card.py （PIL 备选）
+├── term_card.py （PIL 備選）
 │   └── animations.py
 ├── content_analyzer.py
 ├── moviepy
 │   ├── VideoFileClip
 │   ├── CompositeVideoClip
 │   └── ImageClip
-└── 配置文件
+└── 設定檔案
     └── config.json
 ```
 
-## 扩展指南
+## 擴充套件指南
 
-### 添加新组件
+### 新增新元件
 
-#### 1. 创建 HTML 模板
-在 `templates/` 目录创建 `your-component.html`，包含：
+#### 1. 建立 HTML 模板
+在 `templates/` 目錄建立 `your-component.html`，包含：
 ```html
 <script>
 function initAnimation(config) {
-  // 初始化：使用 config 参数设置 DOM 元素
-  // 返回 totalMs：动画总时长
+  // 初始化：使用 config 引數設定 DOM 元素
+  // 返回 totalMs：動畫總時長
 }
 
 function seek(timeMs) {
-  // 关键帧：根据 timeMs 设置动画状态
-  // 由 Playwright 调用
+  // 關鍵幀：根據 timeMs 設定動畫狀態
+  // 由 Playwright 呼叫
 }
 </script>
 ```
 
-#### 2. 添加渲染方法
-在 `BrowserRenderer` 类中添加：
+#### 2. 新增渲染方法
+在 `BrowserRenderer` 類中新增：
 ```python
 def render_your_component_frames(self, config, output_dir=None):
-    # 类似 render_fancy_text_frames 的实现
+    # 類似 render_fancy_text_frames 的實現
     pass
 ```
 
-#### 3. 在 video_processor.py 中注册
-在 `_generate_clips_browser()` 中添加分支处理新组件。
+#### 3. 在 video_processor.py 中註冊
+在 `_generate_clips_browser()` 中新增分支處理新元件。
 
 #### 4. 更新 content_analyzer.py
-添加对应的 Suggestion dataclass。
+新增對應的 Suggestion dataclass。
 
-#### 5. 添加配置验证
-在配置加载时验证新组件的必需字段。
+#### 5. 新增設定驗證
+在設定載入時驗證新元件的必需欄位。
 
-### 添加新主题
+### 新增新主題
 
-#### 1. 创建 CSS 文件
-在 `static/css/` 目录创建 `theme-yourtheme.css`：
+#### 1. 建立 CSS 檔案
+在 `static/css/` 目錄建立 `theme-yourtheme.css`：
 ```css
 :root[data-theme="yourtheme"] {
   --primary-color: #...;
@@ -322,52 +322,52 @@ def render_your_component_frames(self, config, output_dir=None):
 <link rel="stylesheet" href="../static/css/theme-yourtheme.css">
 ```
 
-#### 3. 更新文档
-在 SKILL.md 中列出新主题。
+#### 3. 更新檔案
+在 SKILL.md 中列出新主題。
 
-## 性能考虑
+## 效能考慮
 
-### Browser 后端性能
-- 优点：高质量输出，支持复杂 CSS/动画
-- 缺点：需要 Chromium，较慢（但可控）
-- 优化：
+### Browser 後端效能
+- 優點：高質量輸出，支援複雜 CSS/動畫
+- 缺點：需要 Chromium，較慢（但可控）
+- 最佳化：
   - 使用 `--headless` 模式
-  - 预热浏览器实例
-  - 批量渲染多组件时复用实例
+  - 預熱瀏覽器例項
+  - 批次渲染多元件時複用例項
 
-### PIL 后端性能
-- 优点：快速，无额外依赖
-- 缺点：效果有限，不支持复杂动画
-- 优化：
-  - 预计算变换矩阵
-  - 使用 NumPy 加速计算
+### PIL 後端效能
+- 優點：快速，無額外依賴
+- 缺點：效果有限，不支援複雜動畫
+- 最佳化：
+  - 預計算變換矩陣
+  - 使用 NumPy 加速計算
 
-## 依赖分析
+## 依賴分析
 
-### 核心依赖
-- `moviepy>=1.0.3`: 视频合成
-- `pillow>=10.0.0`: 图像处理（两个后端都需要）
-- `numpy>=1.24.0`: 数值计算
+### 核心依賴
+- `moviepy>=1.0.3`: 影片合成
+- `pillow>=10.0.0`: 影像處理（兩個後端都需要）
+- `numpy>=1.24.0`: 數值計算
 - `pysrt>=1.1.2`: SRT 字幕解析
-- `playwright>=1.40.0`: 浏览器自动化（可选）
+- `playwright>=1.40.0`: 瀏覽器自動化（可選）
 
-### 依赖大小
-- 总计：约 100-150MB（包括 Playwright + Chromium）
-- 仅 PIL 后端：约 50-80MB
+### 依賴大小
+- 總計：約 100-150MB（包括 Playwright + Chromium）
+- 僅 PIL 後端：約 50-80MB
 
 ## 故障排除
 
-### Playwright/Chromium 问题
+### Playwright/Chromium 問題
 ```bash
-# 手动安装
+# 手動安裝
 pip install playwright
 playwright install chromium
 
-# 验证
+# 驗證
 playwright codegen --browser chromium
 ```
 
-### MoviePy 依赖问题
+### MoviePy 依賴問題
 ```bash
 # macOS
 brew install ffmpeg
@@ -375,28 +375,28 @@ brew install ffmpeg
 # Ubuntu
 sudo apt-get install ffmpeg
 
-# 验证
+# 驗證
 moviepy-script --version
 ```
 
-### 内存问题
-- 长视频：分段处理或降低分辨率
-- 多组件：批量处理时控制并发
+### 記憶體問題
+- 長影片：分段處理或降低解析度
+- 多元件：批次處理時控制併發
 
-## 测试策略
+## 測試策略
 
-### 单元测试
-- 动画函数：spring(), interpolate()
-- 配置解析和验证
+### 單元測試
+- 動畫函式：spring(), interpolate()
+- 設定解析和驗證
 - 渲染器初始化
 
-### 集成测试
-- 完整工作流：输入 → 渲染 → 输出
-- 两个后端对比（视觉一致性）
-- 不同主题的渲染
+### 整合測試
+- 完整工作流：輸入 → 渲染 → 輸出
+- 兩個後端對比（視覺一致性）
+- 不同主題的渲染
 
-### 性能测试
-- 帧渲染速度
-- 内存使用
-- 长视频处理
+### 效能測試
+- 幀渲染速度
+- 記憶體使用
+- 長影片處理
 

@@ -15,7 +15,7 @@
 /* ===== Fancy Text - Aurora ===== */
 
 .fancy-text.theme-aurora {
-    font-family: "Avenir Next", "PingFang SC", sans-serif;
+    font-family: "Avenir Next", "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", "PingFang SC", sans-serif;
     font-weight: 700;
     letter-spacing: 0.02em;
 }
@@ -118,7 +118,7 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    font-family: "Avenir Next", "PingFang SC", sans-serif;
+    font-family: "Avenir Next", "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", "PingFang SC", sans-serif;
     font-weight: 700;
     font-size: 28px;
 }
@@ -132,7 +132,7 @@
 
 .term-card.theme-aurora .description {
     color: var(--text-light);
-    font-family: -apple-system, "PingFang SC", sans-serif;
+    font-family: -apple-system, "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", "PingFang SC", sans-serif;
     font-size: 15px;
     line-height: 1.6;
     opacity: 0.9;

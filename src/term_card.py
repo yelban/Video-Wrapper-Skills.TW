@@ -17,15 +17,20 @@ class TermCardGenerator:
         self.card_height = 250
         self.position = (self.width - 50 - self.card_width, 50)  # 右上角
 
-        # 字体路径
+        # 字體路徑（優先順序：蘋方 > 微軟正黑 > 思源黑體 > 其他）
         self.font_paths_zh = [
-            "/System/Library/Fonts/STHeiti Medium.ttc",  # macOS 华文黑体（首选）
-            "/System/Library/Fonts/STHeiti Light.ttc",   # macOS 华文黑体细体
+            "/System/Library/Fonts/PingFang.ttc",  # macOS 蘋方（繁體首選）
+            "/Library/Fonts/Microsoft JhengHei.ttf",  # macOS 微軟正黑
+            "C:\\Windows\\Fonts\\msjh.ttc",  # Windows 微軟正黑
+            "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",  # Linux Noto Sans CJK
+            "/usr/share/fonts/noto-cjk/NotoSansCJK-Regular.ttc",  # Linux Noto Sans CJK (alt)
+            "/System/Library/Fonts/STHeiti Medium.ttc",  # macOS 華文黑體
+            "/System/Library/Fonts/STHeiti Light.ttc",   # macOS 華文黑體細體
             "/System/Library/Fonts/Supplemental/Arial Unicode.ttf",  # macOS Unicode
             "/usr/share/fonts/truetype/droid/DroidSansFallbackFull.ttf",  # Linux
-            "/usr/share/fonts/truetype/wqy/wqy-microhei.ttc",  # Linux 文泉驿
-            "C:\\Windows\\Fonts\\msyh.ttc",  # Windows 微软雅黑
-            "C:\\Windows\\Fonts\\simhei.ttf",  # Windows 黑体
+            "/usr/share/fonts/truetype/wqy/wqy-microhei.ttc",  # Linux 文泉驛
+            "C:\\Windows\\Fonts\\msyh.ttc",  # Windows 微軟雅黑
+            "C:\\Windows\\Fonts\\simhei.ttf",  # Windows 黑體
         ]
         self.font_paths_en = [
             "/System/Library/Fonts/Supplemental/Arial.ttf",  # macOS

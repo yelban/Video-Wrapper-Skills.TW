@@ -12,10 +12,15 @@ class FancyTextGenerator:
         self.height = height
         self.fps = fps
 
-        # 字体配置
+        # 字體設定（優先順序：蘋方 > 微軟正黑 > 思源黑體 > 其他）
         self.font_paths = [
-            "/System/Library/Fonts/STHeiti Medium.ttc",  # macOS 中文字体（首选）
-            "/System/Library/Fonts/STHeiti Light.ttc",   # macOS 中文字体（备选）
+            "/System/Library/Fonts/PingFang.ttc",  # macOS 蘋方（繁體首選）
+            "/Library/Fonts/Microsoft JhengHei.ttf",  # macOS 微軟正黑
+            "C:\\Windows\\Fonts\\msjh.ttc",  # Windows 微軟正黑
+            "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",  # Linux Noto Sans CJK
+            "/usr/share/fonts/noto-cjk/NotoSansCJK-Regular.ttc",  # Linux Noto Sans CJK (alt)
+            "/System/Library/Fonts/STHeiti Medium.ttc",  # macOS 華文黑體
+            "/System/Library/Fonts/STHeiti Light.ttc",   # macOS 華文黑體細體
             "/System/Library/Fonts/Supplemental/Arial Unicode.ttf",  # macOS Unicode 字体
             "/usr/share/fonts/truetype/droid/DroidSansFallbackFull.ttf",  # Linux
             "/usr/share/fonts/truetype/wqy/wqy-microhei.ttc",  # Linux 文泉驿

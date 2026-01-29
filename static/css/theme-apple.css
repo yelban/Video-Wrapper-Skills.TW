@@ -16,7 +16,7 @@
 /* ===== Fancy Text - Apple ===== */
 
 .fancy-text.theme-apple {
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", "PingFang SC", sans-serif;
     font-weight: 700;
     letter-spacing: -0.02em;
 }
@@ -56,7 +56,7 @@
 
 .term-card.theme-apple .title {
     color: var(--text-dark);
-    font-family: -apple-system, "SF Pro Display", "PingFang SC", sans-serif;
+    font-family: -apple-system, "SF Pro Display", "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", "PingFang SC", sans-serif;
     font-weight: 700;
     font-size: 28px;
     letter-spacing: -0.02em;
@@ -73,7 +73,7 @@
 
 .term-card.theme-apple .description {
     color: var(--text-dark);
-    font-family: -apple-system, "SF Pro Text", "PingFang SC", sans-serif;
+    font-family: -apple-system, "SF Pro Text", "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", "PingFang SC", sans-serif;
     font-weight: 400;
     font-size: 15px;
     line-height: 1.5;

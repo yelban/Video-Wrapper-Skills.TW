@@ -19,7 +19,7 @@ body {
 
 .fancy-text {
     position: absolute;
-    font-family: "STHeiti", "Heiti SC", "Microsoft YaHei", "PingFang SC", sans-serif;
+    font-family: "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", "STHeiti", "Heiti SC", "Microsoft YaHei", "PingFang SC", sans-serif;
     font-size: 52px;
     font-weight: bold;
     white-space: nowrap;
@@ -111,7 +111,7 @@ body {
 }
 
 .term-card .title {
-    font-family: "STHeiti", "Heiti SC", "Microsoft YaHei", "PingFang SC", sans-serif;
+    font-family: "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", "STHeiti", "Heiti SC", "Microsoft YaHei", "PingFang SC", sans-serif;
     font-size: 32px;
     font-weight: bold;
     color: #FFD700;
@@ -127,7 +127,7 @@ body {
 }
 
 .term-card .description {
-    font-family: "STHeiti", "Heiti SC", "Microsoft YaHei", "PingFang SC", sans-serif;
+    font-family: "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", "STHeiti", "Heiti SC", "Microsoft YaHei", "PingFang SC", sans-serif;
     font-size: 16px;
     color: #E0E0E0;
     line-height: 1.6;

@@ -16,7 +16,7 @@
 /* ===== Fancy Text - Cyberpunk ===== */
 
 .fancy-text.theme-cyberpunk {
-    font-family: "Orbitron", "STHeiti", "Heiti SC", sans-serif;
+    font-family: "Orbitron", "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", "STHeiti", "Heiti SC", sans-serif;
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -89,7 +89,7 @@
 
 .term-card.theme-cyberpunk .title {
     color: var(--primary);
-    font-family: "Orbitron", "STHeiti", sans-serif;
+    font-family: "Orbitron", "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", "STHeiti", sans-serif;
     font-weight: 700;
     text-shadow: 0 0 10px var(--primary);
     letter-spacing: 0.05em;
@@ -104,6 +104,6 @@
 
 .term-card.theme-cyberpunk .description {
     color: var(--text-light);
-    font-family: "STHeiti", sans-serif;
+    font-family: "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", "STHeiti", sans-serif;
     opacity: 0.9;
 }
