@@ -132,7 +132,7 @@ python src/video_processor.py video.mp4 subs.srt config.json -r pil      # PIL �
 </tr>
 <tr>
 <td align="center">🟡 教育/知識分享</td>
-<td align="center">💜 科技/前沿話題</td>
+<td align="center">💜 科技/前瞻議題</td>
 <td align="center">⚪ 商務/專業訪談</td>
 <td align="center">🌈 創意/藝術內容</td>
 </tr>
@@ -198,7 +198,7 @@ python src/video_processor.py video.mp4 subs.srt config.json -r pil      # PIL �
 | 主題 | 色系 | 特點 | 適用內容 |
 |------|------|------|----------|
 | **Notion** | 暖黃 + 藍色 | 柔和漸變，知識感 | 教育、知識分享、課程 |
-| **Cyberpunk** | 霓虹紫 + 青色 | 高對比，科技感 | 技術、科幻、前沿話題 |
+| **Cyberpunk** | 霓虹紫 + 青色 | 高對比，科技感 | 技術、科幻、前瞻議題 |
 | **Apple** | 黑白灰 | 極簡，專業感 | 商務、企業、正式訪談 |
 | **Aurora** | 漸變彩虹 | 流光溢彩，藝術感 | 創意、設計、藝術內容 |
 

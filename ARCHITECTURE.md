@@ -143,7 +143,7 @@ CSS 主題在 `static/css/` 目錄：
 | 主題 | 檔案 | 特點 | 場景 |
 |------|------|------|------|
 | notion | theme-notion.css | 溫暖知識風，柔和漸變 | 教育、知識分享 |
-| cyberpunk | theme-cyberpunk.css | 霓虹未來感，鮮豔對比 | 科技、前沿話題 |
+| cyberpunk | theme-cyberpunk.css | 霓虹未來感，鮮豔對比 | 科技、前瞻議題 |
 | apple | theme-apple.css | 極簡優雅，中性色系 | 商務、專業訪談 |
 | aurora | theme-aurora.css | 漸變流光，炫彩效果 | 創意、藝術內容 |
 
