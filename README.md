@@ -29,7 +29,7 @@ AI 智慧分析字幕內容，自動生成特效建議，一鍵渲染專業級�
 
 ### 🎨 8 種視覺元件
 - **綜藝字卡高亮** - 短語概括核心觀點
-- **人物條** - 顯示嘉賓姓名職位
+- **人物條** - 顯示來賓姓名職位
 - **章節標題** - 話題切換標題卡
 - **術語解釋字卡** - 專業術語解釋
 - **金句字卡** - 精彩言論突出
@@ -142,7 +142,7 @@ python src/video_processor.py video.mp4 subs.srt config.json -r pil      # PIL �
 
 | 元件 | 效果預覽 | 使用場景 |
 |------|---------|----------|
-| 🏷️ **綜藝字卡** | _[效果圖佔位]_ | 嘉賓說到"通用人工智慧"時，螢幕上方顯示"AI發展是平滑曲線" |
+| 🏷️ **綜藝字卡** | _[效果圖佔位]_ | 來賓說到"通用人工智慧"時，螢幕上方顯示"AI發展是平滑曲線" |
 | 👤 **人物條** | _[效果圖佔位]_ | 影片開始時展示"Dario Amodei · CEO · Anthropic" |
 | 📖 **術語解釋字卡** | _[效果圖佔位]_ | 首次提到"摩爾定律"時，自動彈出解釋卡片 |
 | 💬 **金句** | _[效果圖佔位]_ | 精彩觀點"AI的發展是一個非常平滑的指數曲線"突出顯示 |
@@ -168,7 +168,7 @@ python src/video_processor.py video.mp4 subs.srt config.json -r pil      # PIL �
 - 人物專訪
 - 圓桌討論
 - 行業對話
-- 需要嘉賓資訊展示
+- 需要來賓資訊展示
 
 </td>
 <td width="33%">
@@ -305,7 +305,7 @@ python src/video_processor.py video.mp4 subs.srt config.json -r pil      # PIL �
 
 | 元件 | 必需引數 | 可選引數 | 說明 |
 |------|---------|---------|------|
-| 人物條 | name, role, company, startMs | durationMs (預設5s) | 顯示嘉賓資訊 |
+| 人物條 | name, role, company, startMs | durationMs (預設5s) | 顯示來賓資訊 |
 | 章節標題 | number, title, startMs | subtitle, durationMs | 話題分段 |
 | 綜藝字卡 | text, startMs, endMs | style, position | **text 必須是短語** |
 | 術語解釋字卡 | chinese, english, firstAppearanceMs | description, displayDurationSeconds | 術語解釋 |

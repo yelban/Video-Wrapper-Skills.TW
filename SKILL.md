@@ -20,7 +20,7 @@ agent: general-purpose
 
 1. 讀取字幕檔案 (.srt)
 2. 分析內容，識別：
-   - 嘉賓資訊（用於人物條）
+   - 來賓資訊（用於人物條）
    - 話題切換點（用於章節標題）
    - 關鍵詞和術語（用於綜藝字卡）
    - 專業名詞（用於術語解釋字卡）
@@ -66,7 +66,7 @@ agent: general-purpose
 
 | 元件 | 用途 | 設定欄位 |
 |------|------|----------|
-| 人物條 (lower_third) | 顯示嘉賓資訊 | name, role, company, startMs, durationMs |
+| 人物條 (lower_third) | 顯示來賓資訊 | name, role, company, startMs, durationMs |
 | 章節標題 (chapter_title) | 話題切換標題 | number, title, subtitle, startMs, durationMs |
 | 綜藝字卡 (fancy_text) | 概括當前觀點 | text, style, startMs, endMs, position |
 | 術語解釋字卡 (term_card) | 解釋術語 | chinese, english, description, firstAppearanceMs |
