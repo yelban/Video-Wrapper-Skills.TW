@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 專案概述
 
-這是一個 Claude Code Skill，為訪談/播客影片新增綜藝風格視覺包裝（花字、名詞卡片、人物條等）。使用 Playwright + HTML/CSS/Anime.js 渲染高品質特效，MoviePy 合成影片。
+這是一個 Claude Code Skill，為訪談/播客影片新增綜藝風格視覺包裝（綜藝字卡、術語解釋字卡、人物條等）。使用 Playwright + HTML/CSS/Anime.js 渲染高品質特效，MoviePy 合成影片。
 
 ## 常用指令
 
@@ -47,9 +47,9 @@ uv run python src/video_processor.py video.mp4 subs.srt config.json -r pil
 
 ## 元件規範
 
-**花字 vs 名詞卡片**：
-- 花字（keyPhrases）：短語概括觀點，如「AI發展是平滑曲線」
-- 名詞卡片（termDefinitions）：術語解釋，如「摩爾定律：電晶體數量每18-24個月翻倍」
+**綜藝字卡 vs 術語解釋字卡**：
+- 綜藝字卡（keyPhrases）：短語概括觀點，如「AI發展是平滑曲線」
+- 術語解釋字卡（termDefinitions）：術語解釋，如「摩爾定律：電晶體數量每18-24個月翻倍」
 
 ## 擴充指南
 

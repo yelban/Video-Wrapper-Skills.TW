@@ -32,8 +32,8 @@ This plan localizes all documentation and UI-facing text from Simplified Chinese
   網路	網路
   程式	程式
   使用者	使用者
-  賬號	帳號
-  日誌	紀錄
+  帳號	帳號
+  紀錄	紀錄
   備份	備份
   伺服器	伺服器
   螢幕	螢幕

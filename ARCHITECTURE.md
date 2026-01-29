@@ -47,8 +47,8 @@ Playwright 瀏覽器自動化渲染器，負責：
 
 關鍵類和方法：
 - `BrowserRenderer`: 主類，生命週期管理
-- `render_fancy_text_frames()`: 花字渲染
-- `render_term_card_frames()`: 名詞卡片渲染
+- `render_fancy_text_frames()`: 綜藝字卡渲染
+- `render_term_card_frames()`: 術語解釋字卡渲染
 - `render_lower_third_frames()`: 人物條渲染
 - 以及其他 8 個元件的渲染方法
 
@@ -73,11 +73,11 @@ Playwright 瀏覽器自動化渲染器，負責：
 - 分析內容，識別：
   - 嘉賓資訊（人物條）
   - 話題切換點（章節標題）
-  - 關鍵觀點（花字短語）
-  - 專業術語（名詞卡片）
-  - 精彩言論（金句卡片）
-  - 數字資料（資料動畫）
-  - 核心要點（要點列表）
+  - 關鍵觀點（綜藝字卡短語）
+  - 專業術語（術語解釋字卡）
+  - 精彩言論（金句字卡）
+  - 數字資料（數字字卡）
+  - 核心要點（重點列表）
   - 社交媒體資訊（社交條）
 
 包含多個 Dataclass 定義建議型別：
@@ -91,14 +91,14 @@ Playwright 瀏覽器自動化渲染器，負責：
 - `SocialBarSuggestion`
 
 ### 4. fancy_text.py（PIL 備選方案）
-純 Python PIL 實現的花字生成器：
+純 Python PIL 實現的綜藝字卡生成器：
 - PIL 文字渲染與描邊
 - 陰影效果實現
 - 旋轉和縮放變換
 - Spring 動畫應用
 
 ### 5. term_card.py（PIL 備選方案）
-純 Python PIL 實現的名詞卡片生成器：
+純 Python PIL 實現的術語解釋字卡生成器：
 - 圓角矩形繪製
 - 漸變邊框（Pillow 模擬）
 - 文字佈局和自動換行
@@ -119,13 +119,13 @@ Playwright 瀏覽器自動化渲染器，負責：
 
 | 模板 | 元件型別 | 用途 |
 |------|---------|------|
-| fancy-text.html | 花字 | 概括觀點短語 |
-| term-card.html | 名詞卡片 | 解釋專業術語 |
+| fancy-text.html | 綜藝字卡 | 概括觀點短語 |
+| term-card.html | 術語解釋字卡 | 解釋專業術語 |
 | lower-third.html | 人物條 | 顯示嘉賓資訊 |
 | chapter-title.html | 章節標題 | 話題切換標題 |
-| quote-callout.html | 金句卡片 | 突出精彩言論 |
-| animated-stats.html | 資料動畫 | 展示數字資料 |
-| bullet-points.html | 要點列表 | 總結核心要點 |
+| quote-callout.html | 金句字卡 | 突出精彩言論 |
+| animated-stats.html | 數字字卡 | 展示數字資料 |
+| bullet-points.html | 重點列表 | 總結核心要點 |
 | social-bar.html | 社交條 | 社交媒體引導 |
 | video-config.json.template | 設定模板 | JSON 設定示例 |
 
@@ -181,11 +181,11 @@ JSON 設定包含以下頂級欄位：
   "theme": "notion",           # 選擇主題
   "lowerThirds": [...],        # 人物條陣列
   "chapterTitles": [...],      # 章節標題陣列
-  "keyPhrases": [...],         # 花字陣列
-  "termDefinitions": [...],    # 名詞卡片陣列
-  "quotes": [...],             # 金句卡片陣列
-  "stats": [...],              # 資料動畫陣列
-  "bulletPoints": [...],       # 要點列表陣列
+  "keyPhrases": [...],         # 綜藝字卡陣列
+  "termDefinitions": [...],    # 術語解釋字卡陣列
+  "quotes": [...],             # 金句字卡陣列
+  "stats": [...],              # 數字字卡陣列
+  "bulletPoints": [...],       # 重點列表陣列
   "socialBars": [...]          # 社交條陣列
 }
 ```
@@ -198,7 +198,7 @@ JSON 設定包含以下頂級欄位：
     ↓
 ContentAnalyzer.analyze_subtitle() 讀取 .srt
     ↓
-返回 8 種類型的建議物件列表
+返回 8 種型別的建議物件列表
     ↓
 使用者編輯或確認建議
     ↓

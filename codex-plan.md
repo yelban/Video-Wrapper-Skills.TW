@@ -34,12 +34,12 @@ This plan localizes all documentation and UI-facing text from Simplified Chinese
   使用者	使用者
   帳號	帳號
   紀錄	紀錄
-  备份	備份
+  備份	備份
   伺服器	伺服器
   螢幕	螢幕
   模型	模型
-  训练	訓練
-  编码	編碼
+  訓練	訓練
+  編碼	編碼
   設定	設定
   元件	元件
   軟體	軟體
@@ -125,8 +125,8 @@ This plan localizes all documentation and UI-facing text from Simplified Chinese
   ```markdown
   > 🇹🇼 **繁體中文版**
   >
-  > 這是 [op7418/Video-Wrapper-Skills](https://github.com/op7418/Video-Wrapper-Skills) 的繁體中文（台灣）版本。
-  > 使用 OpenCC s2twp 轉換並加入台灣常用詞彙對照。
+  > 這是 [op7418/Video-Wrapper-Skills](https://github.com/op7418/Video-Wrapper-Skills) 的繁體中文（臺灣）版本。
+  > 使用 OpenCC s2twp 轉換並加入臺灣常用詞彙對照。
   ```
 - Only insert if the notice block is not already present.
 

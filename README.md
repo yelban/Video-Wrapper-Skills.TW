@@ -4,8 +4,8 @@
 
 > 🇹🇼 **繁體中文版**
 >
-> 這是 [op7418/Video-Wrapper-Skills](https://github.com/op7418/Video-Wrapper-Skills) 的繁體中文（台灣）版本。
-> 使用 OpenCC s2twp 轉換並加入台灣常用詞彙對照。
+> 這是 [op7418/Video-Wrapper-Skills](https://github.com/op7418/Video-Wrapper-Skills) 的繁體中文（臺灣）版本。
+> 使用 OpenCC s2twp 轉換並加入臺灣常用詞彙對照。
 
 **為訪談/播客影片新增綜藝風格視覺包裝**
 
@@ -28,13 +28,13 @@ AI 智慧分析字幕內容，自動生成特效建議，一鍵渲染專業級�
 <td width="50%">
 
 ### 🎨 8 種視覺元件
-- **花字高亮** - 短語概括核心觀點
+- **綜藝字卡高亮** - 短語概括核心觀點
 - **人物條** - 顯示嘉賓姓名職位
 - **章節標題** - 話題切換標題卡
-- **名詞卡片** - 專業術語解釋
-- **金句卡片** - 精彩言論突出
-- **資料動畫** - 數字動態展示
-- **要點列表** - 核心觀點總結
+- **術語解釋字卡** - 專業術語解釋
+- **金句字卡** - 精彩言論突出
+- **數字字卡** - 數字動態展示
+- **重點列表** - 核心觀點總結
 - **社交條** - 關注引導資訊
 
 </td>
@@ -100,7 +100,7 @@ playwright install chromium
 
 Claude 會：
 1. 📊 分析字幕，識別關鍵資訊
-2. 💡 生成特效建議（人物條、花字、名詞卡片等）
+2. 💡 生成特效建議（人物條、綜藝字卡、術語解釋字卡等）
 3. 📝 展示 Markdown 格式建議供審批
 4. ✅ 確認後自動渲染輸出影片
 
@@ -142,9 +142,9 @@ python src/video_processor.py video.mp4 subs.srt config.json -r pil      # PIL �
 
 | 元件 | 效果預覽 | 使用場景 |
 |------|---------|----------|
-| 🏷️ **花字** | _[效果圖佔位]_ | 嘉賓說到"通用人工智慧"時，螢幕上方顯示"AI發展是平滑曲線" |
+| 🏷️ **綜藝字卡** | _[效果圖佔位]_ | 嘉賓說到"通用人工智慧"時，螢幕上方顯示"AI發展是平滑曲線" |
 | 👤 **人物條** | _[效果圖佔位]_ | 影片開始時展示"Dario Amodei · CEO · Anthropic" |
-| 📖 **名詞卡片** | _[效果圖佔位]_ | 首次提到"摩爾定律"時，自動彈出解釋卡片 |
+| 📖 **術語解釋字卡** | _[效果圖佔位]_ | 首次提到"摩爾定律"時，自動彈出解釋卡片 |
 | 💬 **金句** | _[效果圖佔位]_ | 精彩觀點"AI的發展是一個非常平滑的指數曲線"突出顯示 |
 
 ---
@@ -307,14 +307,14 @@ python src/video_processor.py video.mp4 subs.srt config.json -r pil      # PIL �
 |------|---------|---------|------|
 | 人物條 | name, role, company, startMs | durationMs (預設5s) | 顯示嘉賓資訊 |
 | 章節標題 | number, title, startMs | subtitle, durationMs | 話題分段 |
-| 花字 | text, startMs, endMs | style, position | **text 必須是短語** |
-| 名詞卡片 | chinese, english, firstAppearanceMs | description, displayDurationSeconds | 術語解釋 |
+| 綜藝字卡 | text, startMs, endMs | style, position | **text 必須是短語** |
+| 術語解釋字卡 | chinese, english, firstAppearanceMs | description, displayDurationSeconds | 術語解釋 |
 | 金句 | text, author, startMs | durationMs, position | 精彩觀點 |
 | 資料 | number, label, startMs | prefix, unit, durationMs | 數字展示 |
 | 要點 | title, points, startMs | durationMs | 列表總結 |
 | 社交條 | platform, handle, startMs | label, durationMs | 關注引導 |
 
-> ⚠️ **花字使用規範**：text 必須是短語（如"AI發展是平滑曲線"），不能是單詞（如"人工智慧"）。單詞應使用名詞卡片。
+> ⚠️ **綜藝字卡使用規範**：text 必須是短語（如"AI發展是平滑曲線"），不能是單詞（如"人工智慧"）。單詞應使用術語解釋字卡。
 
 ---
 
@@ -330,7 +330,7 @@ video-wrapper/
 │   ├── video_processor.py       # 主處理流程
 │   ├── browser_renderer.py      # Playwright 渲染器
 │   ├── content_analyzer.py      # AI 內容分析
-│   ├── fancy_text.py            # PIL 花字渲染
+│   ├── fancy_text.py            # PIL 綜藝字卡渲染
 │   ├── term_card.py             # PIL 卡片渲染
 │   └── animations.py            # 動畫函式庫
 ├── 📁 templates/                # HTML 模板

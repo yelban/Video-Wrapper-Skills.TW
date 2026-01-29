@@ -1,6 +1,6 @@
 ---
 name: video-wrapper
-description: 為訪談影片新增綜藝特效（花字、卡片、人物條、章節標題等）。支援 4 種視覺主題，先分析字幕內容生成建議供使用者審批，再渲染影片。
+description: 為訪談影片新增綜藝特效（綜藝字卡、卡片、人物條、章節標題等）。支援 4 種視覺主題，先分析字幕內容生成建議供使用者審批，再渲染影片。
 argument-hint: <video-file> <subtitle-file> [config.json] [output.mp4]
 user-invocable: true
 allowed-tools: Bash, Read, Write
@@ -16,17 +16,17 @@ agent: general-purpose
 
 ### 第一步：分析字幕內容
 
-當用戶提供影片和字幕檔案時，先分析字幕內容，生成特效建議：
+當使用者提供影片和字幕檔案時，先分析字幕內容，生成特效建議：
 
 1. 讀取字幕檔案 (.srt)
 2. 分析內容，識別：
    - 嘉賓資訊（用於人物條）
    - 話題切換點（用於章節標題）
-   - 關鍵詞和術語（用於花字）
-   - 專業名詞（用於名詞卡片）
-   - 精彩觀點（用於金句卡片）
-   - 數字資料（用於資料動畫）
-   - 核心要點（用於要點列表）
+   - 關鍵詞和術語（用於綜藝字卡）
+   - 專業名詞（用於術語解釋字卡）
+   - 精彩觀點（用於金句字卡）
+   - 數字資料（用於數字字卡）
+   - 核心要點（用於重點列表）
 3. 生成建議列表，展示給使用者稽核
 
 ### 第二步：使用者稽核
@@ -44,7 +44,7 @@ agent: general-purpose
 - **公司**: Anthropic
 - **出現時間**: 1000ms
 
-### 2. 花字高亮 (Fancy Text)
+### 2. 綜藝字卡高亮 (Fancy Text)
 1. **通用人工智慧** (emphasis)
    時間: 2630ms - 5500ms
    原因: 核心概念首次提及
@@ -68,28 +68,28 @@ agent: general-purpose
 |------|------|----------|
 | 人物條 (lower_third) | 顯示嘉賓資訊 | name, role, company, startMs, durationMs |
 | 章節標題 (chapter_title) | 話題切換標題 | number, title, subtitle, startMs, durationMs |
-| 花字 (fancy_text) | 概括當前觀點 | text, style, startMs, endMs, position |
-| 名詞卡片 (term_card) | 解釋術語 | chinese, english, description, firstAppearanceMs |
-| 金句卡片 (quote_callout) | 突出精彩觀點 | text, author, startMs, durationMs, position |
-| 資料動畫 (animated_stats) | 展示數字 | prefix, number, unit, label, startMs |
-| 要點列表 (bullet_points) | 總結核心要點 | title, points[], startMs, durationMs |
-| 社交媒體條 (social_bar) | 關注引導 | platform, label, handle, startMs, durationMs |
+| 綜藝字卡 (fancy_text) | 概括當前觀點 | text, style, startMs, endMs, position |
+| 術語解釋字卡 (term_card) | 解釋術語 | chinese, english, description, firstAppearanceMs |
+| 金句字卡 (quote_callout) | 突出精彩觀點 | text, author, startMs, durationMs, position |
+| 數字字卡 (animated_stats) | 展示數字 | prefix, number, unit, label, startMs |
+| 重點列表 (bullet_points) | 總結核心要點 | title, points[], startMs, durationMs |
+| 社群追蹤條 (social_bar) | 關注引導 | platform, label, handle, startMs, durationMs |
 
-### 花字使用規範
+### 綜藝字卡使用規範
 
-⚠️ **重要**：花字必須遵循以下規範：
+⚠️ **重要**：綜藝字卡必須遵循以下規範：
 
 1. **必須是短語**：用簡短的句子概括說話人當時的觀點
    - ✅ 正確：「AI發展是平滑曲線」「智慧增長類似摩爾定律」
-   - ❌ 錯誤：「人工智慧」「摩爾定律」（這些是單詞，應該用名詞卡片）
+   - ❌ 錯誤：「人工智慧」「摩爾定律」（這些是單詞，應該用術語解釋字卡）
 
-2. **與名詞卡片互補**：
-   - 花字：概括觀點（如「智慧每年翻倍增長」）
-   - 名詞卡片：解釋術語（如「摩爾定律：積體電路電晶體數量每18-24個月翻一番」）
+2. **與術語解釋字卡互補**：
+   - 綜藝字卡：概括觀點（如「智慧每年翻倍增長」）
+   - 術語解釋字卡：解釋術語（如「摩爾定律：積體電路電晶體數量每18-24個月翻一番」）
 
 3. **位置在上方**：預設顯示在螢幕上方區域（字幕上方），避免遮擋人臉
 
-### 社交媒體條使用規範
+### 社群追蹤條使用規範
 
 - 預設顯示時長：8 秒（比其他元件更長，給使用者足夠時間記住）
 - 通常在影片結尾出現
@@ -219,16 +219,16 @@ python src/video_processor.py video.mp4 subs.srt config.json -r pil
 │   ├── video_processor.py    # 主處理指令碼
 │   ├── browser_renderer.py   # Playwright 渲染器
 │   ├── content_analyzer.py   # 內容分析器
-│   ├── fancy_text.py         # PIL 花字（備用）
+│   ├── fancy_text.py         # PIL 綜藝字卡（備用）
 │   └── term_card.py          # PIL 卡片（備用）
 ├── templates/
-│   ├── fancy-text.html       # 花字模板
-│   ├── term-card.html        # 名詞卡片模板
+│   ├── fancy-text.html       # 綜藝字卡模板
+│   ├── term-card.html        # 術語解釋字卡模板
 │   ├── lower-third.html      # 人物條模板
 │   ├── chapter-title.html    # 章節標題模板
-│   ├── quote-callout.html    # 金句卡片模板
-│   ├── animated-stats.html   # 資料動畫模板
-│   └── bullet-points.html    # 要點列表模板
+│   ├── quote-callout.html    # 金句字卡模板
+│   ├── animated-stats.html   # 數字字卡模板
+│   └── bullet-points.html    # 重點列表模板
 ├── static/
 │   ├── css/
 │   │   ├── effects.css       # 基礎效果
