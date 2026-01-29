@@ -173,7 +173,27 @@ else
 fi
 
 # ============================================================================
-# Phase 8: 自動 Commit
+# Phase 8: 更新倉庫 URL（上游 → 繁體中文版）
+# ============================================================================
+log_info "更新倉庫 URL..."
+
+# 定義 URL 替換（安裝指令等）
+UPSTREAM_REPO="op7418/Video-Wrapper-Skills"
+ZH_TW_REPO="yelban/Video-Wrapper-Skills.TW"
+
+# 替換安裝指令中的倉庫 URL（保留繁體中文版聲明中的上游連結）
+for md_file in README.md SKILL.md; do
+    if [[ -f "$md_file" ]]; then
+        # 替換 npx skills add 指令
+        sed -i '' "s|npx skills add https://github.com/${UPSTREAM_REPO}|npx skills add https://github.com/${ZH_TW_REPO}|g" "$md_file"
+        # 替換 git clone 指令
+        sed -i '' "s|git clone https://github.com/${UPSTREAM_REPO}.git|git clone https://github.com/${ZH_TW_REPO}.git|g" "$md_file"
+        log_info "  更新: $md_file"
+    fi
+done
+
+# ============================================================================
+# Phase 9: 自動 Commit
 # ============================================================================
 log_info "檢查變更並 commit..."
 

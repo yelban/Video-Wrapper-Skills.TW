@@ -72,7 +72,7 @@ AI 智慧分析字幕內容，自動生成特效建議，一鍵渲染專業級�
 **方式一：一鍵安裝（推薦）**
 
 ```bash
-npx skills add https://github.com/op7418/Video-Wrapper-Skills
+npx skills add https://github.com/yelban/Video-Wrapper-Skills.TW
 ```
 
 **方式二：手動安裝**
@@ -80,7 +80,7 @@ npx skills add https://github.com/op7418/Video-Wrapper-Skills
 ```bash
 # 克隆到 Claude Skills 目錄
 cd ~/.claude/skills/
-git clone https://github.com/op7418/Video-Wrapper-Skills.git video-wrapper
+git clone https://github.com/yelban/Video-Wrapper-Skills.TW.git video-wrapper
 cd video-wrapper
 
 # 安裝依賴
